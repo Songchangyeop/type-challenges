@@ -1,5 +1,13 @@
 import type { Equal, Expect } from '@type-challenges/utils'
 
+// type MyAwaited<T extends Promise<any>> = T extends Promise<infer U> ? U extends Promise<any> ? MyAwaited<U> : U : T;
+
+type MyAwaited<T> = T extends PromiseLike<infer U>
+  ? U extends PromiseLike<any>
+    ? MyAwaited<U>
+    : U
+  : never
+
 type X = Promise<string>
 type Y = Promise<{ field: number }>
 type Z = Promise<Promise<string | number>>
