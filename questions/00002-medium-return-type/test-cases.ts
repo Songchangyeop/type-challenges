@@ -1,5 +1,7 @@
 import type { Equal, Expect } from '@type-challenges/utils'
 
+type MyReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer R ? R : never
+
 type cases = [
   Expect<Equal<string, MyReturnType<() => string>>>,
   Expect<Equal<123, MyReturnType<() => 123>>>,
@@ -13,7 +15,7 @@ type cases = [
 type ComplexObject = {
   a: [12, 'foo']
   bar: 'hello'
-  prev(): number
+  prev: () => number
 }
 
 const fn = (v: boolean) => v ? 1 : 2
